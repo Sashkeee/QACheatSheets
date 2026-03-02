@@ -1,7 +1,7 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useTheme } from '../../stores/theme'
-import { useEffect } from 'react'
-import { Terminal, GraduationCap, ListChecks, Layers, Database, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Terminal, GraduationCap, ListChecks, Layers, Database, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search, Menu, X } from 'lucide-react'
 
 const navGroups = [
     {
@@ -45,6 +45,13 @@ const navGroups = [
 export function Layout() {
     const { theme, toggleTheme } = useTheme()
     const navigate = useNavigate()
+    const location = useLocation()
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+    // Закрывать меню при смене пути
+    useEffect(() => {
+        setIsMobileMenuOpen(false)
+    }, [location.pathname])
 
     useEffect(() => {
         const root = window.document.documentElement
@@ -59,17 +66,34 @@ export function Layout() {
 
     return (
         <div className="min-h-screen flex mesh-bg text-foreground antialiased font-sans transition-colors duration-200">
+            {/* Mobile Sidebar Backdrop */}
+            {isMobileMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden animate-in fade-in duration-200"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
+
             {/* Sidebar with Logo */}
-            <aside className="hidden w-80 flex-col glass border-r border-white/10 p-5 lg:flex h-screen sticky top-0 overflow-y-auto shrink-0 z-40 scrollbar-hide">
+            <aside className={`fixed inset-y-0 left-0 z-50 w-80 flex-col glass border-r border-white/10 p-5 h-screen overflow-y-auto shrink-0 transition-transform duration-300 lg:sticky lg:top-0 lg:flex lg:translate-x-0 scrollbar-hide flex ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 {/* Logo Section */}
-                <div className="flex items-center gap-3 text-foreground cursor-pointer group mb-6 px-2" onClick={() => navigate('/')}>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-                        <FileText size={22} className="stroke-[2.5]" />
+                <div className="flex items-center justify-between mb-6 px-2">
+                    <div className="flex items-center gap-3 text-foreground cursor-pointer group" onClick={() => navigate('/')}>
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                            <FileText size={22} className="stroke-[2.5]" />
+                        </div>
+                        <div className="flex flex-col">
+                            <h2 className="text-lg font-black leading-none tracking-tight text-foreground">QA CHEAT</h2>
+                            <span className="text-[10px] font-bold text-primary tracking-[0.4em] uppercase">Sheet</span>
+                        </div>
                     </div>
-                    <div className="flex flex-col">
-                        <h2 className="text-lg font-black leading-none tracking-tight text-foreground">QA CHEAT</h2>
-                        <span className="text-[10px] font-bold text-primary tracking-[0.4em] uppercase">Sheet</span>
-                    </div>
+                    {/* Close button for mobile inside sidebar */}
+                    <button
+                        className="lg:hidden flex h-10 w-10 items-center justify-center rounded-xl text-foreground glass border border-white/10 hover:bg-background/50 active:scale-95 transition-all"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        <X size={20} />
+                    </button>
                 </div>
 
                 <div className="flex flex-col gap-6">
@@ -103,7 +127,13 @@ export function Layout() {
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col relative min-w-0">
                 {/* Floating Top Controls */}
-                <div className="absolute top-5 right-8 z-50 flex items-center gap-4">
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-8 z-30 flex items-center gap-2 sm:gap-4">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(true)}
+                        className="lg:hidden volumetric flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-foreground glass border border-white/10 shadow-sm"
+                    >
+                        <Menu size={18} />
+                    </button>
                     <div className="hidden md:flex items-center rounded-2xl bg-background/30 glass border border-white/10 px-4 py-2 transition-all focus-within:bg-background/60 focus-within:ring-2 focus-within:ring-primary/20 w-64 lg:w-80 shadow-sm">
                         <Search className="text-muted-foreground/60" size={16} />
                         <input className="ml-3 w-full bg-transparent text-sm text-foreground placeholder-muted-foreground/50 outline-none font-medium" placeholder="Поиск..." />
@@ -116,8 +146,8 @@ export function Layout() {
                     </button>
                 </div>
 
-                <main className="flex-1 p-8 lg:p-12 xl:px-16 xl:pb-16 xl:pt-20 max-w-7xl mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <div className="glass rounded-[3.5rem] p-8 lg:p-12 xl:p-16 min-h-full transition-all duration-500 shadow-2xl">
+                <main className="flex-1 p-4 pt-16 sm:p-8 lg:p-12 xl:px-16 xl:pb-16 xl:pt-20 max-w-7xl mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="glass rounded-[2rem] sm:rounded-[3.5rem] p-5 sm:p-8 lg:p-12 xl:p-16 min-h-full transition-all duration-500 shadow-2xl">
                         <Outlet />
                     </div>
                 </main>

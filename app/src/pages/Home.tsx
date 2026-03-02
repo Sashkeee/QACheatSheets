@@ -4,27 +4,27 @@ export function Home() {
     return (
         <div className="mx-auto max-w-6xl w-full space-y-16 animate-in fade-in duration-1000">
             {/* Hero Section */}
-            <div className="relative overflow-hidden rounded-[3rem] glass p-1 lg:p-2 group">
+            <div className="relative overflow-hidden rounded-[2.5rem] lg:rounded-[3rem] glass p-1 lg:p-2 group">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 opacity-30 group-hover:opacity-50 transition-opacity" />
-                <div className="relative rounded-[2.5rem] bg-background/40 p-10 lg:p-14 lg:flex lg:items-center lg:gap-12">
-                    <div className="flex-1 space-y-8">
-                        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.3em] text-primary animate-pulse">
+                <div className="relative rounded-[2.2rem] lg:rounded-[2.5rem] bg-background/40 p-6 sm:p-10 lg:p-14 lg:flex lg:items-center lg:gap-12">
+                    <div className="flex-1 space-y-6 sm:space-y-8">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-primary animate-pulse">
                             <Sparkles size={12} />
                             Обновлено: Март 2026
                         </div>
                         <div className="space-y-4">
-                            <h1 className="text-5xl lg:text-7xl font-black text-foreground tracking-tighter leading-tight italic">
+                            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-foreground tracking-tighter leading-tight italic">
                                 QA CHEAT<br /><span className="text-primary not-italic">SHEET</span>
                             </h1>
-                            <p className="text-xl text-muted-foreground/90 font-medium leading-relaxed max-w-xl">
+                            <p className="text-lg sm:text-xl text-muted-foreground/90 font-medium leading-relaxed max-w-xl">
                                 Твой интерактивный навигатор по миру тестирования. Глубокие знания, упакованные в современные аналоги и практические кейсы.
                             </p>
                         </div>
-                        <div className="flex flex-wrap gap-4">
-                            <a href="/roadmap/basics" className="h-14 px-10 inline-flex items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <a href="/roadmap/basics" className="h-14 w-full sm:w-auto px-10 inline-flex items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
                                 Начать обучение
                             </a>
-                            <button className="volumetric h-14 px-10 inline-flex items-center justify-center rounded-2xl font-black text-sm uppercase tracking-widest text-foreground cursor-pointer">
+                            <button className="volumetric h-14 w-full sm:w-auto px-10 inline-flex items-center justify-center rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest text-foreground cursor-pointer">
                                 Карта развития
                             </button>
                         </div>
