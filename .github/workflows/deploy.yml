@@ -30,7 +30,7 @@ jobs:
         with:
           context: ./app
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/qa-cheatsheet:latest
+          tags: ghcr.io/sashkeee/qa-cheatsheet:latest
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
@@ -42,11 +42,10 @@ jobs:
             mkdir -p ~/QA_CheatSheet
             cd ~/QA_CheatSheet
             
-            # Создаем или обновляем docker-compose прямо на сервере
             cat <<EOF > docker-compose.yml
             services:
               qa-cheatsheet:
-                image: ghcr.io/${{ github.repository_owner }}/qa-cheatsheet:latest
+                image: ghcr.io/sashkeee/qa-cheatsheet:latest
                 container_name: qa-cheatsheet
                 ports:
                   - "8082:80"
