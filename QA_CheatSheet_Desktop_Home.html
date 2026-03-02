@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QA CheatSheet Главная (Темная тема)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6", // Blue accent
+                        "primary-dark": "#2563eb",
+                        "background-light": "#1f2937", // Dark gray background for 'light' mode override to match request
+                        "background-dark": "#111827", // Very dark gray
+                        "surface-light": "#374151", // Dark gray surface
+                        "surface-dark": "#1f2937", // Dark gray surface
+                        "text-main": "#f3f4f6", // Light text
+                        "text-main-dark": "#f9fafb",
+                        "text-secondary": "#9ca3af", // Gray text
+                        "text-secondary-dark": "#d1d5db",
+                        "border-light": "#4b5563",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        display: ["Spline Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-dark text-text-main font-display antialiased min-h-screen flex flex-col transition-colors duration-200">
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-border-dark bg-background-dark/95 backdrop-blur-sm px-6 py-4 lg:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">QA CheatSheet</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-[320px]">
+<div class="flex w-full items-center rounded-lg bg-surface-dark border border-border-dark px-3 py-2 transition-all focus-within:ring-2 focus-within:ring-primary/50">
+<span class="material-symbols-outlined text-text-secondary">search</span>
+<input class="ml-2 w-full bg-transparent text-sm text-text-main placeholder-text-secondary outline-none" placeholder="Поиск тем, инструментов или концепций..."/>
+<div class="flex items-center gap-1 rounded border border-border-dark bg-background-dark px-1.5 py-0.5 text-xs font-medium text-text-secondary">
+                        ⌘K
+                    </div>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-surface-dark text-text-main hover:bg-border-dark transition-colors border border-border-dark">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-surface-dark text-text-main hover:bg-border-dark transition-colors border border-border-dark">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="hidden lg:flex h-10 px-4 cursor-pointer items-center justify-center rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-sm transition-colors">
+                PRO Доступ
+            </button>
+</div>
+</header>
+<div class="flex flex-1">
+<aside class="hidden w-64 flex-col border-r border-border-dark bg-surface-dark lg:flex h-[calc(100vh-73px)] sticky top-[73px] overflow-y-auto">
+<div class="flex flex-col p-4 gap-6">
+<div class="rounded-xl bg-background-dark p-4 border border-border-dark">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-text-secondary">Ваш прогресс</span>
+<span class="text-xs font-bold text-primary">35%</span>
+</div>
+<div class="w-full bg-gray-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 35%"></div>
+</div>
+<p class="mt-2 text-[10px] text-text-secondary">3 из 8 тем изучено</p>
+</div>
+<div>
+<h3 class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-text-secondary">Основные концепции</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg bg-primary/20 px-3 py-2 text-sm font-medium text-primary-300 transition-colors border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-lg">home</span>
+                            Обзор
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                            Типы тестирования
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">bug_report</span>
+                            Жизненный цикл бага
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">rule</span>
+                            Тест-план
+                        </a>
+</nav>
+</div>
+<div>
+<h3 class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-text-secondary">Автоматизация и Инструменты</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">smart_toy</span>
+                            Selenium
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">api</span>
+                            API Тестирование
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">terminal</span>
+                            Cypress
+                        </a>
+</nav>
+</div>
+<div>
+<h3 class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-text-secondary">Процессы</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">autorenew</span>
+                            Agile / Scrum
+                        </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-text-secondary hover:bg-border-dark hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">speed</span>
+                            Производительность
+                        </a>
+</nav>
+</div>
+<div class="mt-auto rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 p-4 border border-primary/20">
+<p class="text-sm font-bold text-text-main mb-1">Новичок в QA?</p>
+<p class="text-xs text-text-secondary mb-3">Скачайте наш полный PDF-гайд для начинающих.</p>
+<button class="w-full rounded-lg bg-primary py-2 text-xs font-bold text-white shadow-sm hover:bg-primary-dark transition-colors">Скачать сейчас</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-x-hidden p-6 lg:p-10 bg-background-dark">
+<div class="mx-auto max-w-6xl">
+<div class="mb-10 rounded-2xl bg-surface-dark p-6 shadow-sm ring-1 ring-border-dark lg:flex lg:items-center lg:gap-8 lg:p-8">
+<div class="flex-1">
+<div class="mb-4 inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-bold text-primary">
+                            v2.4 Обновлено
+                        </div>
+<h1 class="mb-3 text-3xl font-bold text-text-main lg:text-4xl">Основные темы QA</h1>
+<p class="mb-6 text-lg text-text-secondary">Курируемая коллекция быстрых справок, чек-листов и лучших практик для современного инженера по обеспечению качества.</p>
+<div class="flex gap-3">
+<button class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
+                                Начать обучение
+                            </button>
+<button class="inline-flex items-center justify-center rounded-lg border border-border-dark bg-transparent px-5 py-2.5 text-sm font-bold text-text-main transition-colors hover:bg-surface-light">
+                                Карта развития
+                            </button>
+</div>
+</div>
+<div class="mt-6 lg:mt-0 lg:w-1/3">
+<div class="aspect-video w-full rounded-xl bg-cover bg-center shadow-inner opacity-80" data-alt="Abstract representation of software testing dashboard on a screen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOD6WVT5my0-2OD25ClDJnIbBR2f_pvvXqTgM-S1QLRZEW0xnLTL-_GMwXOngbumQqLH2lE3Rzwb6-ct-VCwqPBC8ZCIccWo9L6ClBjW3H91fbOpLGUVhDdIB9M8d3KBMHgmgX2YP9XZLhbIZwkPFsamDFSUl6zHrQVRZ_sYDvrTdU0RydOXmelg8fCDGUp8MVuKhwKWvSIUxnoL_VcKpeMWRGMWk__ZSwqvH5MLwDqoEEStCfo4fZzVhaDJp1AvqWlz5xhaaVP9k');"></div>
+</div>
+</div>
+<div class="mb-8">
+<h2 class="mb-4 text-xl font-bold text-text-main">Карточки быстрой справки</h2>
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-900/30 text-blue-400">
+<span class="material-symbols-outlined">change_history</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">Пирамида тестов</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Понимание соотношения Unit, Integration и E2E тестов.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Концепция</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-red-900/30 text-red-400">
+<span class="material-symbols-outlined">bug_report</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">Баг-репорт</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Стандартный шаблон для качественных отчетов об ошибках: шаги, результат и т.д.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Шаблон</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-green-900/30 text-green-400">
+<span class="material-symbols-outlined">http</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">Коды ответов HTTP</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Быстрый поиск ошибок серий 200, 400 и 500.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Шпаргалка</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-900/30 text-purple-400">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">Церемонии Agile</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Scrum ритуалы, планирование спринта и гайды по ретроспективе.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Процесс</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-900/30 text-orange-400">
+<span class="material-symbols-outlined">database</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">SQL Основы</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Основные запросы для валидации баз данных: SELECT, JOIN, WHERE.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Техническое</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-xl border border-border-dark bg-surface-dark p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50">
+<div class="absolute top-4 right-4 z-10">
+<input class="h-5 w-5 rounded border-gray-600 bg-gray-700 text-primary focus:ring-primary focus:ring-offset-gray-800" title="Отметить как изученное" type="checkbox"/>
+</div>
+<div>
+<div class="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-teal-900/30 text-teal-400">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<h3 class="mb-1 text-lg font-bold text-text-main">Мобильные эвристики</h3>
+<p class="text-sm text-text-secondary line-clamp-2">Чек-лист для тестирования на iOS и Android: прерывания, сети и т.д.</p>
+</div>
+<div class="mt-4 flex items-center justify-between border-t border-border-dark pt-3">
+<span class="text-xs font-medium text-text-secondary">Чек-лист</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid gap-8 lg:grid-cols-2">
+<div class="rounded-xl bg-surface-dark border border-border-dark p-6">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-main">Последние статьи</h3>
+<a class="text-sm font-medium text-primary hover:underline" href="#">Все статьи</a>
+</div>
+<div class="flex flex-col gap-4">
+<a class="flex gap-4 group" href="#">
+<div class="h-20 w-28 shrink-0 rounded-lg bg-cover bg-center" data-alt="Code snippets on a dark screen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQE08VePllaXurqCV_yDF682hCUJeUBgBcaIqfWTdvv58T-8V7V4xTgwTrUeR6mZtrI69JrbWcIGfCAYVtrh8M5Ke6Pe_Ff0J7cmKE5x1mdNtO8I0AFiBUWHB7-JaxMdCsumQXiRxRUrA9Rna8ZT0w7CrHzsVR4hn40Eke8XN2Z41wP-sO2dzgbLhFdeLsrBZIlAer5XntI7o7ArzKLeFlXZVEgLaZR2yq87q2bAT7bk0f-wyc5j94jlOTwTm7ch-bEq86I2Ik-m4');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Cypress IO в 2024: Полный обзор</h4>
+<p class="text-sm text-text-secondary line-clamp-1">Глубокое погружение в новейшие функции...</p>
+<span class="mt-1 text-xs text-text-secondary">5 мин. чтение</span>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="h-20 w-28 shrink-0 rounded-lg bg-cover bg-center" data-alt="Laptop computer showing code and charts" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsd_r1v53rxIlvffBYm2ifG6BcfWJUdcgUWywG3Xssw9PZyekdPmoCdggseqO4x7WR_7W2_Ry9mmbi9WHTXtluDdBZyobe8aLr68SMv8PHWQfesWIt8VHdTHwQxehEWNC8RJXXEJW4stiMQdnXjAEGlp9P_sEtJBvBTrg8SccQgbXCFBNyp6efpDelrn0v8_g8Cv7GIR_Q16jj4aOT4xzqU-vtd1mOj6xY_CQFS1fqTPn0PDcpUwKjPc9FJYYljO-VFWz9aBWUMp4');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Shift Left Testing: Что это?</h4>
+<p class="text-sm text-text-secondary line-clamp-1">Почему раннее тестирование экономит деньги и время.</p>
+<span class="mt-1 text-xs text-text-secondary">7 мин. чтение</span>
+</div>
+</a>
+</div>
+</div>
+<div class="rounded-xl bg-surface-dark border border-border-dark p-6">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-main">Популярные инструменты</h3>
+<a class="text-sm font-medium text-primary hover:underline" href="#">Каталог</a>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 rounded-full border border-border-dark px-3 py-1 text-sm font-medium text-text-main hover:bg-border-dark cursor-pointer transition-colors">
+<img alt="Jira" class="h-4 w-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC2fxlsqgKFZNaaVCm53ouu06QzEvLxbAb_Ns8RNWB-Si_l3B_mlNY8zXB-cdemvBvYCgPYIvbTEA1vzeN2gJU-JqbR_mAYa-P4NUtcvXQimAsm1hoVSRrEYl24hWrKjZrVX8mN-vpghYqRfYkJ8KTn7EkZnDsYX2tgaIYFEZWXSl-3oHsLlqZ4nOSUEbzFjv7o1X7_Wt2eMXFapVBsOD5qq8sDbaCOfuamgrQ5XGj2N0wdlEZg9OeDrKJJNhbj-VHmmNa_Y5jMi0"/> Jira
+                            </span>
+<span class="inline-flex items-center gap-1.5 rounded-full border border-border-dark px-3 py-1 text-sm font-medium text-text-main hover:bg-border-dark cursor-pointer transition-colors">
+<img alt="Selenium" class="h-4 w-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVU8xRIyu7IFZTq0zdFWWG3xB2P8pohhvN2dLq_poxvow8JAtg6nVn7vbrZE7g1SZaLOK_NXQk9_b0DRnolkubgoh2-61sKIZRM845zcRUfqvKsE3d_HZeUx9fpStnfu14_kwXAhgAilwCCLrVmV1jDlSVhE_kTFRyOryb049Wm7QrWTvMjG4uq9ZSqB--ZgyBQOo_yL7l2uWrf4gOAP4Dt56V-a7WuPWx_6Sl8Xwy8v117lkieLe-kLSbEC7DupMk3bZjpv0iy9Y"/> Selenium
+                            </span>
+<span class="inline-flex items-center gap-1.5 rounded-full border border-border-dark px-3 py-1 text-sm font-medium text-text-main hover:bg-border-dark cursor-pointer transition-colors">
+<img alt="Postman" class="h-4 w-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_HuaCTCBLftieeGO9PjqsQqvYqJTkRTENKksCE2pV_VoZR1G5GV7jngTZie3baaPy1DFbUQSJCbt9yaci5dwL4WxYpyUlHoQvWKyGbVQJzv0Rtctg67rCH9TikMOj4gQ0H31rNZM-P7vpQgo-xHmUqsGokVUyFUHXq0Rlxenq_CzfHvUenJWFFsxveppNFe6zD8qPeWda8kF7yTNE3brum1hU9jcnaJtD9_kx2Ki4EH0W47YWOoBVp7xq3ZzDVnc5IG-rRPrYlSs"/> Postman
+                            </span>
+<span class="inline-flex items-center gap-1.5 rounded-full border border-border-dark px-3 py-1 text-sm font-medium text-text-main hover:bg-border-dark cursor-pointer transition-colors">
+<img alt="Jenkins" class="h-4 w-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWrAWxp03SUsKxmbM5S8gpnDZI7APGOmkOkbM0nagJf3o7acuL6JuDpusaTlcMsj7lN9zRIuf6363UX4iSJwa-ZbtcByLyF35h37L48kPRR1wG76VigiW3wEAcryKDFsQ9PEFWZcOwicD_N7n4mt-6ixkpho1--NKbfkV49vM49Xr79Ek-wvQHgb2n6S2aZg0s6Da-XPxsNerslZ8fzpoAWx-nD4nnnlZqWAap8x0WB0ZCZ25Wu_-6uWsB0AE_E9FOFnBP5uHDEvU"/> Jenkins
+                            </span>
+<span class="inline-flex items-center gap-1.5 rounded-full border border-border-dark px-3 py-1 text-sm font-medium text-text-main hover:bg-border-dark cursor-pointer transition-colors">
+<img alt="Docker" class="h-4 w-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKWQgVhYhKe0pFPp8BLuUHr07gvugTYSfaroVxwK_5Z2SXNRx_hCfveiOjwANHkItyeFns6UeBQqqSZ6kRENocOQiKA8xKOdYMXH-vn8U3qilEdOy8Il9Bc2MFM73uYsSFb64xYfe4L1sfp9rolk2bG0jd0AlaRxVfnP7sDmfcxbC4sZTkoJAJ5I9kTQUMkeijdC1V5IrxEGo-h2JZ5sF35x596_AIb2ft4NsXPYygTaLujNu2r3TJFYhegJvu5bFmlrSRCahbpgs"/> Docker
+                            </span>
+</div>
+<div class="mt-6 rounded-lg bg-background-dark p-4 border border-border-dark">
+<p class="text-sm font-semibold text-text-main">Инструмент месяца: <span class="text-primary">Playwright</span></p>
+<p class="mt-1 text-xs text-text-secondary">Быстрое и надежное E2E тестирование для современных веб-приложений.</p>
+<button class="mt-3 w-full rounded bg-primary/20 py-1.5 text-xs font-bold text-primary hover:bg-primary/30 transition-colors">Читать гайд</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
