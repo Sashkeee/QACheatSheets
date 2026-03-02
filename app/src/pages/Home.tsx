@@ -6,14 +6,14 @@ export function Home() {
             <div className="mb-10 rounded-2xl bg-muted/20 p-6 shadow-sm ring-1 ring-border lg:flex lg:items-center lg:gap-8 lg:p-8">
                 <div className="flex-1">
                     <div className="mb-4 inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-bold text-primary">
-                        v2.4 Обновлено
+                        Материалы 2026
                     </div>
-                    <h1 className="mb-3 text-3xl font-bold text-foreground lg:text-4xl">Основные темы QA</h1>
-                    <p className="mb-6 text-lg text-muted-foreground">Курируемая коллекция быстрых справок, чек-листов и лучших практик для современного инженера по обеспечению качества.</p>
+                    <h1 className="mb-3 text-3xl font-bold text-foreground lg:text-4xl">QA CheatSheet</h1>
+                    <p className="mb-6 text-lg text-muted-foreground">Интерактивный учебник, построенный на базе лучших книг по тестированию: Назина, Болье, Савин, Google и другие.</p>
                     <div className="flex gap-3">
-                        <button className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
+                        <a href="/roadmap/basics" className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
                             Начать обучение
-                        </button>
+                        </a>
                         <button className="inline-flex items-center justify-center rounded-lg border border-border bg-transparent px-5 py-2.5 text-sm font-bold text-foreground transition-colors hover:bg-muted/50">
                             Карта развития
                         </button>
@@ -29,56 +29,47 @@ export function Home() {
                 <h2 className="mb-4 text-xl font-bold text-foreground">Карточки быстрой справки</h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-                    <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
-                        <div className="absolute top-4 right-4 z-10">
-                            <input className="h-5 w-5 rounded border-muted bg-muted text-primary focus:ring-primary focus:ring-offset-background" title="Отметить как изученное" type="checkbox" />
-                        </div>
+                    <a href="/roadmap/types" className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div>
                             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-blue-500 bg-blue-500/20">
                                 <Triangle size={24} />
                             </div>
                             <h3 className="mb-1 text-lg font-bold text-foreground">Пирамида тестов</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">Понимание соотношения Unit, Integration и E2E тестов.</p>
+                            <p className="text-sm text-muted-foreground line-clamp-2">Соотношение Unit, Integration и E2E по версии Google и Ошерова.</p>
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                             <span className="text-xs font-medium text-muted-foreground">Концепция</span>
                             <ArrowRight className="text-muted-foreground group-hover:text-primary transition-colors" size={16} />
                         </div>
-                    </div>
+                    </a>
 
-                    <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
-                        <div className="absolute top-4 right-4 z-10">
-                            <input className="h-5 w-5 rounded border-muted bg-muted text-primary focus:ring-primary focus:ring-offset-background" title="Отметить как изученное" type="checkbox" />
-                        </div>
+                    <a href="/roadmap/test-design" className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div>
                             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-red-500 bg-red-500/20">
                                 <Bug size={24} />
                             </div>
-                            <h3 className="mb-1 text-lg font-bold text-foreground">Баг-репорт</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">Стандартный шаблон для качественных отчетов об ошибках: шаги, результат и т.д.</p>
+                            <h3 className="mb-1 text-lg font-bold text-foreground">Тест-дизайн</h3>
+                            <p className="text-sm text-muted-foreground line-clamp-2">Техники EP, BVA и Pairwise от Ольги Назиной.</p>
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-                            <span className="text-xs font-medium text-muted-foreground">Шаблон</span>
+                            <span className="text-xs font-medium text-muted-foreground">Теория</span>
                             <ArrowRight className="text-muted-foreground group-hover:text-primary transition-colors" size={16} />
                         </div>
-                    </div>
+                    </a>
 
-                    <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
-                        <div className="absolute top-4 right-4 z-10">
-                            <input className="h-5 w-5 rounded border-muted bg-muted text-primary focus:ring-primary focus:ring-offset-background" title="Отметить как изученное" type="checkbox" />
-                        </div>
+                    <a href="/roadmap/api" className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div>
                             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-green-500 bg-green-500/20">
                                 <Globe size={24} />
                             </div>
-                            <h3 className="mb-1 text-lg font-bold text-foreground">Коды ответов HTTP</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">Быстрый поиск ошибок серий 200, 400 и 500.</p>
+                            <h3 className="mb-1 text-lg font-bold text-foreground">REST API</h3>
+                            <p className="text-sm text-muted-foreground line-clamp-2">Коды ответов HTTP и методы взаимодействия фронта с бэком.</p>
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                             <span className="text-xs font-medium text-muted-foreground">Шпаргалка</span>
                             <ArrowRight className="text-muted-foreground group-hover:text-primary transition-colors" size={16} />
                         </div>
-                    </div>
+                    </a>
 
                     <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div className="absolute top-4 right-4 z-10">
@@ -97,22 +88,19 @@ export function Home() {
                         </div>
                     </div>
 
-                    <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
-                        <div className="absolute top-4 right-4 z-10">
-                            <input className="h-5 w-5 rounded border-muted bg-muted text-primary focus:ring-primary focus:ring-offset-background" title="Отметить как изученное" type="checkbox" />
-                        </div>
+                    <a href="/roadmap/databases" className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div>
                             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-orange-500 bg-orange-500/20">
                                 <Database size={24} />
                             </div>
                             <h3 className="mb-1 text-lg font-bold text-foreground">SQL Основы</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-2">Основные запросы для валидации баз данных: SELECT, JOIN, WHERE.</p>
+                            <p className="text-sm text-muted-foreground line-clamp-2">Краткий гайд по SELECT, JOIN и агрегатным функциям из книги А. Болье.</p>
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                             <span className="text-xs font-medium text-muted-foreground">Техническое</span>
                             <ArrowRight className="text-muted-foreground group-hover:text-primary transition-colors" size={16} />
                         </div>
-                    </div>
+                    </a>
 
                     <div className="group relative flex flex-col justify-between rounded-xl border border-border bg-muted/20 p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/50 cursor-pointer">
                         <div className="absolute top-4 right-4 z-10">
