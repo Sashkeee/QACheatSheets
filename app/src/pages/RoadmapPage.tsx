@@ -1,7 +1,32 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { roadmapData } from '../data/roadmapData';
-import { BookOpen, ArrowLeft, XCircle, CheckCircle2, HelpCircle, ChevronRight } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { BookOpen, ArrowLeft, XCircle, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { QuizBlock } from '../components/QuizBlock';
+
+// Микротипографика по дизайн-коду
+const formatMicrotypography = (text: string) => {
+    let result = text;
+    // Французские кавычки
+    result = result.replace(/"([^"]*)"/g, '«$1»');
+    // Длинное тире
+    result = result.replace(/ - /g, ' — ');
+    // Неразрывные пробелы перед предлогами
+    result = result.replace(/(^|\s)(а|и|в|к|с|у|о|по|из|на|от|до|за|со|об)\s/gi, '$1$2\u00A0');
+    return result;
+};
+
+// Helper to safely format microtypography on text nodes
+const formatChildren = (children: React.ReactNode): React.ReactNode => {
+    if (typeof children === 'string') {
+        return formatMicrotypography(children);
+    }
+    if (Array.isArray(children)) {
+        return children.map((child, i) => <React.Fragment key={i}>{formatChildren(child)}</React.Fragment>);
+    }
+    return children;
+};
 
 export function RoadmapPage() {
     const { id, sectionIdx } = useParams<{ id: string; sectionIdx?: string }>();
@@ -46,29 +71,36 @@ export function RoadmapPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {data.sections.map((section: any, idx: number) => (
-                        <Link
-                            key={idx}
-                            to={`/roadmap/${id}/${idx}`}
-                            className="group block"
-                        >
-                            <div className="glass h-full rounded-[2.5rem] p-3 transition-all duration-300 hover:scale-[1.02] border border-white/5 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5">
-                                <div className="h-full rounded-[2.2rem] bg-background/40 p-8 flex flex-col items-start space-y-4 shadow-inner shadow-white/5 overflow-hidden relative">
-                                    <h2 className="text-2xl font-black tracking-tight leading-tight group-hover:text-primary transition-colors pr-10">
-                                        {section.title}
-                                    </h2>
+                    {data.sections.map((section: any, idx: number) => {
+                        // Находим первый абзац текста для краткого описания (пропускаем картинки и заголовки)
+                        const description = section.content.find((t: string) =>
+                            t && typeof t === 'string' && !t.startsWith('!') && !t.startsWith('#')
+                        ) || section.content[0];
 
-                                    <p className="text-muted-foreground font-medium leading-relaxed line-clamp-3 flex-1">
-                                        {section.content[0]}
-                                    </p>
+                        return (
+                            <Link
+                                key={idx}
+                                to={`/roadmap/${id}/${idx}`}
+                                className="group block"
+                            >
+                                <div className="glass h-full rounded-[2.5rem] p-3 transition-all duration-300 hover:scale-[1.02] border border-white/5 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5">
+                                    <div className="h-full rounded-[2.2rem] bg-background/40 p-8 flex flex-col items-start space-y-4 shadow-inner shadow-white/5 overflow-hidden relative">
+                                        <h2 className="text-2xl font-black tracking-tight leading-tight group-hover:text-primary transition-colors pr-10">
+                                            {section.title}
+                                        </h2>
 
-                                    <div className="flex items-center gap-2 text-primary text-xs font-black uppercase tracking-[0.2em] pt-4">
-                                        Подробнее <ChevronRight size={14} />
+                                        <p className="text-muted-foreground font-medium leading-relaxed line-clamp-3 flex-1">
+                                            {description}
+                                        </p>
+
+                                        <div className="flex items-center gap-2 text-primary text-xs font-black uppercase tracking-[0.2em] pt-4">
+                                            Подробнее <ChevronRight size={14} />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -78,7 +110,7 @@ export function RoadmapPage() {
     const section = data.sections[currentSectionIdx as number];
 
     return (
-        <div className="max-w-4xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
+        <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
             {/* Breadcrumbs / Back */}
             <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8 px-2 sm:px-6">
                 <Link to={`/roadmap/${id}`}>
@@ -92,12 +124,12 @@ export function RoadmapPage() {
                         <ChevronRight size={12} className="text-muted-foreground/30 hidden sm:block" />
                         <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.25em] text-muted-foreground">Статья {currentSectionIdx as number + 1}</span>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-tight max-w-4xl">{section.title}</h1>
+                    <h1 className="text-[39px] font-bold tracking-tight text-foreground leading-[1.2] max-w-3xl text-left">{formatMicrotypography(section.title)}</h1>
                 </div>
             </div>
 
-            <div className="glass rounded-[2rem] sm:rounded-[2.5rem] p-2 sm:p-3 lg:p-4 transition-all border border-white/5 mx-auto">
-                <div className="rounded-[1.8rem] sm:rounded-[2.2rem] bg-background/40 p-5 sm:p-8 lg:p-10 space-y-10 sm:space-y-12 shadow-inner shadow-white/5 overflow-hidden">
+            <div className="mx-auto mt-8 transition-all">
+                <div className="space-y-10 sm:space-y-12">
                     {/* Image */}
                     {section.image && (
                         <div className="group relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] flex justify-center items-center">
@@ -106,59 +138,11 @@ export function RoadmapPage() {
                     )}
 
                     {/* Content */}
-                    <div className="space-y-12">
-                        <div className="grid gap-8">
-                            {section.content.map((item: string, i: number) => {
-                                const trimmed = item.trim();
-                                if (trimmed === "" || trimmed.startsWith("---")) return <div key={i} className="h-4" />;
-
-                                // Image detection ![alt](src)
-                                if (trimmed.startsWith("![") && trimmed.includes("](") && trimmed.endsWith(")")) {
-                                    const alt = trimmed.match(/!\[(.*?)\]/)?.[1] || "Image";
-                                    const src = trimmed.match(/\((.*?)\)/)?.[1] || "";
-                                    return (
-                                        <div key={i} className="my-10 rounded-[2rem] overflow-hidden border border-white/10 bg-black/20 flex justify-center items-center">
-                                            <img src={src} alt={alt} className="w-full h-auto object-contain max-h-[600px] shadow-2xl" />
-                                        </div>
-                                    );
-                                }
-
-                                // Enhanced Header detection (Uppercase or starts with Number.)
-                                const isHeader = i === 0 || /^\d+\./.test(trimmed) || (trimmed.length > 5 && !trimmed.includes(".") && /^[A-ZА-Я\s\d:.!?\-\/]+$/.test(trimmed));
-
-                                if (isHeader) {
-                                    return (
-                                        <h4 key={i} className="text-xl sm:text-2xl font-black text-foreground mt-12 sm:mt-16 mb-4 sm:mb-6 tracking-tight flex items-center gap-4 group border-l-4 border-primary pl-4 sm:pl-6 leading-snug">
-                                            <span className="flex-1">{trimmed}</span>
-                                        </h4>
-                                    );
-                                }
-
-                                // List item detection
-                                const isListItem = trimmed.startsWith("•") || trimmed.startsWith("-") || /^\d+\)/.test(trimmed);
-
-                                return (
-                                    <div key={i} className={`relative group/line ${isListItem ? 'ml-4 sm:ml-6' : ''}`}>
-                                        <div className="absolute -inset-y-3 -inset-x-3 sm:-inset-x-5 bg-primary/5 rounded-2xl scale-95 opacity-0 group-hover/line:scale-100 group-hover/line:opacity-100 transition-all duration-300 -z-10" />
-                                        <div className="flex gap-3 sm:gap-4 font-medium leading-[1.6] sm:leading-[1.8] text-foreground/90 text-base sm:text-[1.1rem]">
-                                            {isListItem ? (
-                                                <div className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-primary shadow-[0_0_10px_rgba(0,186,149,0.5)]" />
-                                            ) : null}
-                                            <p className="flex-1 text-left">
-                                                {isListItem ? (trimmed.startsWith("•") || trimmed.startsWith("-") ? trimmed.slice(1).trim() : trimmed) : (
-                                                    // Handle bold text markers like **text** or simple emphasis
-                                                    trimmed.split(/(\*\*.*?\*\*)/g).map((part, index) => {
-                                                        if (part.startsWith('**') && part.endsWith('**')) {
-                                                            return <strong key={index} className="font-black text-foreground">{part.slice(2, -2)}</strong>;
-                                                        }
-                                                        return part;
-                                                    })
-                                                )}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                    <div className="article-content">
+                        <div className="flex flex-col space-y-6">
+                            <ReactMarkdown>
+                                {section.content.join('\n\n')}
+                            </ReactMarkdown>
                         </div>
 
                         {/* Glossary Block */}
@@ -199,64 +183,12 @@ export function RoadmapPage() {
 
                         {/* Quiz Block */}
                         {section.quiz && section.quiz.length > 0 && (
-                            <div className="space-y-6 sm:space-y-8 pt-10 border-t border-white/5">
-                                <div className="flex items-center gap-3 text-[9px] sm:text-[10px] font-black text-foreground/40 uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-4">
-                                    <HelpCircle size={16} /> Проверка знаний: Квиз
-                                </div>
-                                <div className="grid gap-8 sm:gap-10">
-                                    {section.quiz.map((q: any, qIdx: number) => {
-                                        const key = `${currentSectionIdx}-${qIdx}`;
-                                        const selectedIdx = answers[key];
-                                        const isAnswered = selectedIdx !== undefined;
-
-                                        return (
-                                            <div key={qIdx} className="space-y-4 sm:space-y-6">
-                                                <h5 className="text-lg sm:text-xl font-black text-foreground pr-4 sm:pr-8 leading-snug">{qIdx + 1}. {q.question}</h5>
-                                                <div className="grid gap-2 sm:gap-3">
-                                                    {q.options.map((option: string, oIdx: number) => {
-                                                        const isCorrect = oIdx === q.correctAnswer;
-                                                        const isSelected = selectedIdx === oIdx;
-                                                        let bgClass = "bg-muted/30 border-white/5 hover:bg-muted/50";
-                                                        let icon = null;
-                                                        if (isAnswered) {
-                                                            if (isCorrect) {
-                                                                bgClass = "bg-emerald-500/20 border-emerald-500/30 text-emerald-400";
-                                                                icon = <CheckCircle2 size={16} className="sm:w-[18px] sm:h-[18px]" />;
-                                                            } else if (isSelected) {
-                                                                bgClass = "bg-red-500/20 border-red-500/30 text-red-400";
-                                                                icon = <XCircle size={16} className="sm:w-[18px] sm:h-[18px]" />;
-                                                            } else {
-                                                                bgClass = "bg-muted/10 border-white/5 opacity-50";
-                                                            }
-                                                        }
-                                                        return (
-                                                            <button
-                                                                key={oIdx}
-                                                                disabled={isAnswered}
-                                                                onClick={() => handleAnswer(currentSectionIdx as number, qIdx, oIdx)}
-                                                                className={`w-full text-left p-4 sm:p-5 rounded-xl sm:rounded-2xl border transition-all flex items-center justify-between gap-3 sm:gap-4 font-bold text-[13px] sm:text-[15px] ${bgClass} ${!isAnswered ? 'hover:scale-[1.01] active:scale-[0.99] cursor-pointer' : 'cursor-default'}`}
-                                                            >
-                                                                <div className="flex items-center gap-3 sm:gap-4">
-                                                                    <span className={`h-6 w-6 sm:h-8 sm:w-8 shrink-0 rounded-lg sm:rounded-xl flex items-center justify-center text-[10px] sm:text-xs font-black shadow-inner ${isSelected ? 'bg-foreground text-background' : 'bg-background/50 text-foreground/60'}`}>
-                                                                        {String.fromCharCode(65 + oIdx)}
-                                                                    </span>
-                                                                    {option}
-                                                                </div>
-                                                                {icon}
-                                                            </button>
-                                                        );
-                                                    })}
-                                                </div>
-                                                {isAnswered && (
-                                                    <div className={`text-xs sm:text-sm font-black p-3 sm:p-4 rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500 ${selectedIdx === q.correctAnswer ? 'text-emerald-400/80 bg-emerald-500/5' : 'text-red-400/80 bg-red-500/5'}`}>
-                                                        {selectedIdx === q.correctAnswer ? <>🎯 Великолепно! Правильно.</> : <>💡 Не совсем. Ответ: {String.fromCharCode(65 + q.correctAnswer)}.</>}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
+                            <QuizBlock
+                                quiz={section.quiz}
+                                currentSectionIdx={currentSectionIdx as number}
+                                answers={answers}
+                                onAnswer={handleAnswer}
+                            />
                         )}
                     </div>
                 </div>

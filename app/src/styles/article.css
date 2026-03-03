@@ -1,0 +1,178 @@
+/* ==========================================================================
+   БАЗОВЫЕ НАСТРОЙКИ (VARIABLES & THEMES)
+   ========================================================================== */
+:root {
+    /* Типографика: Гуманистический гротеск */
+    --font-primary: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Адаптивные размеры шрифтов с помощью clamp() */
+    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    /* 16px - 18px */
+    --text-h1: clamp(2.441rem, 2rem + 2vw, 3.052rem);
+    /* ~39px - 48px */
+    --text-h2: clamp(1.953rem, 1.6rem + 1.5vw, 2.441rem);
+    /* ~31px - 39px */
+    --text-h3: clamp(1.563rem, 1.3rem + 1vw, 1.953rem);
+    /* ~25px - 31px */
+    --text-small: 0.875rem;
+    /* 14px */
+
+    /* Вертикальный ритм (Базовая сетка 8px) */
+    --space-xs: 8px;
+    --space-s: 16px;
+    --space-m: 24px;
+    --space-l: 32px;
+    --space-xl: 48px;
+
+    /* Светлая тема (Light Mode) */
+    --article-bg: transparent;
+    --article-text: #1a1a1a;
+    --article-muted: #555555;
+    --article-accent: #2563eb;
+    --article-border: #e5e7eb;
+    --article-quote-bg: #f9fafb;
+}
+
+/* Темная тема (Dark Mode) - Активируется автоматически */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --article-bg: transparent;
+        --article-text: #e6e6e6;
+        --article-muted: #a0a0a0;
+        --article-accent: #60a5fa;
+        --article-border: #2d3748;
+        --article-quote-bg: #1e1e1e;
+    }
+}
+
+/* Избегаем конфликта с Tailwind dark mode */
+.dark {
+    --article-text: #e6e6e6;
+    --article-muted: #a0a0a0;
+    --article-accent: #10b981;
+    /* primary color from the original theme */
+    --article-border: #2d3748;
+    --article-quote-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   ОСНОВНАЯ СТРУКТУРА СТАТЬИ
+   ========================================================================== */
+
+/* Контейнер статьи: ограничиваем длину строки для когнитивного комфорта */
+.article-content {
+    width: 100%;
+    max-width: 75ch;
+    margin: 0 auto;
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   ТИПОГРАФИКА: ЗАГОЛОВКИ И АБЗАЦЫ
+   ========================================================================== */
+.article-content p {
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    color: var(--article-text);
+}
+
+/* Иерархия заголовков */
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-s);
+    color: var(--article-text);
+    letter-spacing: -0.025em;
+}
+
+.article-content h1 {
+    font-size: var(--text-h1);
+    margin-top: 0;
+    font-weight: 900;
+}
+
+.article-content h2 {
+    font-size: var(--text-h2);
+    font-weight: 800;
+}
+
+.article-content h3 {
+    font-size: var(--text-h3);
+    font-weight: 700;
+    border-bottom: 2px solid var(--article-border);
+    padding-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   ЭЛЕМЕНТЫ: СПИСКИ, ЦИТАТЫ, ССЫЛКИ, ИЗОБРАЖЕНИЯ
+   ========================================================================== */
+/* Ссылки */
+.article-content a {
+    color: var(--article-accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 99, 235, 0.3);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.article-content a:hover {
+    text-decoration-color: var(--article-accent);
+}
+
+/* Списки */
+.article-content ul,
+.article-content ol {
+    margin-bottom: var(--space-m);
+    padding-left: var(--space-l);
+    color: var(--article-text);
+}
+
+.article-content li {
+    margin-bottom: var(--space-xs);
+}
+
+/* Цитаты (Blockquotes) */
+.article-content blockquote {
+    margin: var(--space-l) 0;
+    padding: var(--space-m) var(--space-l);
+    background-color: var(--article-quote-bg);
+    border-left: 4px solid var(--article-accent);
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+    color: var(--article-muted);
+}
+
+/* Изображения */
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: var(--space-m) auto;
+    display: block;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark .article-content img {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.article-content figcaption {
+    font-size: var(--text-small);
+    color: var(--article-muted);
+    text-align: center;
+    margin-bottom: var(--space-l);
+}
+
+/* Смысловые акценты (жирный шрифт) */
+.article-content strong {
+    font-weight: 700;
+    color: var(--article-text);
+}

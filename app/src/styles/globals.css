@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./article.css";
 
 @config "../../tailwind.config.js";
 
