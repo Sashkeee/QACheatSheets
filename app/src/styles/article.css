@@ -33,24 +33,12 @@
     --article-quote-bg: #f9fafb;
 }
 
-/* Темная тема (Dark Mode) - Активируется автоматически */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --article-bg: transparent;
-        --article-text: #e6e6e6;
-        --article-muted: #a0a0a0;
-        --article-accent: #60a5fa;
-        --article-border: #2d3748;
-        --article-quote-bg: #1e1e1e;
-    }
-}
-
-/* Избегаем конфликта с Tailwind dark mode */
+/* Темная тема (Dark Mode) - Избегаем конфликта с Tailwind dark mode (только .dark класс) */
 .dark {
+    --article-bg: transparent;
     --article-text: #e6e6e6;
     --article-muted: #a0a0a0;
     --article-accent: #10b981;
-    /* primary color from the original theme */
     --article-border: #2d3748;
     --article-quote-bg: rgba(255, 255, 255, 0.05);
 }

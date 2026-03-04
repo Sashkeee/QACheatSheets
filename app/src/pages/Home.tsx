@@ -1,4 +1,22 @@
-import { ArrowRight, Triangle, Bug, Globe, Database, Zap, Shield, Sparkles } from 'lucide-react'
+import { ArrowRight, Triangle, Bug, Globe, Database, Zap, Shield, Sparkles, LucideIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
+interface QuickCardProps {
+    href: string;
+    icon: LucideIcon;
+    color: string;
+    bgColor: string;
+    title: string;
+    desc: string;
+    tag: string;
+}
+
+interface ArticleItemProps {
+    title: string;
+    desc: string;
+    time: string;
+    img: string;
+}
 
 export function Home() {
     return (
@@ -21,9 +39,9 @@ export function Home() {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a href="/roadmap/basics" className="h-14 w-full sm:w-auto px-10 inline-flex items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
+                            <Link to="/roadmap/basics" className="h-14 w-full sm:w-auto px-10 inline-flex items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all">
                                 Начать обучение
-                            </a>
+                            </Link>
                             <button className="volumetric h-14 w-full sm:w-auto px-10 inline-flex items-center justify-center rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest text-foreground cursor-pointer">
                                 Карта развития
                             </button>
@@ -111,7 +129,7 @@ export function Home() {
                 <div className="glass rounded-[2rem] p-8 space-y-6">
                     <div className="flex items-center justify-between border-b border-border/50 pb-4">
                         <h3 className="text-xl font-black text-foreground tracking-tight">Мини-статьи</h3>
-                        <a className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline" href="#">Все статьи</a>
+                        <Link className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline" to="#">Все статьи</Link>
                     </div>
                     <div className="flex flex-col gap-6">
                         <ArticleItem
@@ -132,7 +150,7 @@ export function Home() {
                 <div className="glass rounded-[2rem] p-8 space-y-8">
                     <div className="flex items-center justify-between border-b border-border/50 pb-4">
                         <h3 className="text-xl font-black text-foreground tracking-tight">Топ Инструментов</h3>
-                        <a className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline" href="#">Каталог</a>
+                        <Link className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline" to="#">Каталог</Link>
                     </div>
                     <div className="flex flex-wrap gap-3">
                         {['Jira', 'Selenium', 'Postman', 'Jenkins', 'Docker', 'K6'].map(tool => (
@@ -158,9 +176,9 @@ export function Home() {
     )
 }
 
-function QuickCard({ href, icon: Icon, color, bgColor, title, desc, tag }: any) {
+function QuickCard({ href, icon: Icon, color, bgColor, title, desc, tag }: QuickCardProps) {
     return (
-        <a href={href} className="volumetric group relative flex flex-col justify-between rounded-3xl p-6 transition-all cursor-pointer overflow-hidden">
+        <Link to={href} className="volumetric group relative flex flex-col justify-between rounded-3xl p-6 transition-all cursor-pointer overflow-hidden">
             <div className="space-y-4 relative z-10">
                 <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${color} ${bgColor} shadow-inner`}>
                     <Icon size={26} className="stroke-[2.5]" />
@@ -176,13 +194,13 @@ function QuickCard({ href, icon: Icon, color, bgColor, title, desc, tag }: any) 
                     <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }
 
-function ArticleItem({ title, desc, time, img }: any) {
+function ArticleItem({ title, desc, time, img }: ArticleItemProps) {
     return (
-        <a className="flex gap-5 group items-center p-2 rounded-2xl hover:bg-white/5 transition-colors" href="#">
+        <Link className="flex gap-5 group items-center p-2 rounded-2xl hover:bg-white/5 transition-colors" to="#">
             <div className="h-20 w-24 shrink-0 rounded-2xl overflow-hidden shadow-lg border border-white/10">
                 <img src={img} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" alt={title} />
             </div>
@@ -191,6 +209,6 @@ function ArticleItem({ title, desc, time, img }: any) {
                 <p className="text-xs text-muted-foreground/70 line-clamp-1 font-medium mt-1">{desc}</p>
                 <span className="mt-2 text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest">{time} чтение</span>
             </div>
-        </a>
+        </Link>
     )
 }

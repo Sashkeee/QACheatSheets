@@ -1,5 +1,5 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { roadmapData } from '../data/roadmapData';
+import { roadmapData, RoadmapSection } from '../data/roadmapData';
 import { BookOpen, ArrowLeft, XCircle, ChevronRight } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -71,7 +71,7 @@ export function RoadmapPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {data.sections.map((section: any, idx: number) => {
+                    {data.sections.map((section: RoadmapSection, idx: number) => {
                         // Находим первый абзац текста для краткого описания (пропускаем картинки и заголовки)
                         const description = section.content.find((t: string) =>
                             t && typeof t === 'string' && !t.startsWith('!') && !t.startsWith('#')
@@ -153,7 +153,7 @@ export function RoadmapPage() {
                                     <BookOpen size={18} className="sm:w-5 sm:h-5" /> Словарь терминов
                                 </div>
                                 <div className="grid gap-5 sm:gap-6 relative z-10">
-                                    {section.glossary.map((term: any, i: number) => (
+                                    {section.glossary.map((term: { term: string; definition: string; }, i: number) => (
                                         <div key={i} className="space-y-1">
                                             <span className="text-base sm:text-lg font-black text-foreground block">{term.term}</span>
                                             <p className="text-sm sm:text-base text-foreground/70 font-medium leading-relaxed">{term.definition}</p>

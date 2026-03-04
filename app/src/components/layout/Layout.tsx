@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTheme } from '../../stores/theme'
 import { useEffect, useState } from 'react'
 import { Terminal, GraduationCap, ListChecks, Layers, Database, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search, Menu, X } from 'lucide-react'
@@ -108,16 +108,16 @@ export function Layout() {
                             </div>
                             <nav className="flex flex-col gap-1.5">
                                 {group.items.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.label}
                                         className="volumetric flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-all group"
-                                        href={item.href}
+                                        to={item.href}
                                     >
                                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-background/50 text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors shadow-inner">
                                             <item.icon size={18} className="stroke-[1.5]" />
                                         </div>
                                         <span className="leading-tight text-[13px]">{item.label}</span>
-                                    </a>
+                                    </Link>
                                 ))}
                             </nav>
                         </div>
