@@ -39,6 +39,7 @@ const navGroups = [
         title: "Карьера",
         items: [
             { icon: Briefcase, label: "Подготовка к работе", href: "/roadmap/career" },
+            { icon: FileText, label: "Статьи", href: "/roadmap/articles" }
         ]
     }
 ]

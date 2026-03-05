@@ -27,6 +27,7 @@ import { introQa2 } from './intro-qa/introQa2';
 import { introQa3 } from './intro-qa/introQa3';
 import { introQa4 } from './intro-qa/introQa4';
 import { introQa5 } from './intro-qa/introQa5';
+import { careerNavigator } from './careerNavigator';
 
 export const roadmapData: Record<string, RoadmapItem> = {
     "intro-qa": {
@@ -278,5 +279,6 @@ export const roadmapData: Record<string, RoadmapItem> = {
                 ]
             }
         ]
-    }
+    },
+    articles: careerNavigator
 };
