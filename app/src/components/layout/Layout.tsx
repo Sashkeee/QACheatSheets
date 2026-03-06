@@ -9,6 +9,7 @@ const navGroups = [
         title: "Введение",
         items: [
             { icon: Brain, label: "Начало. Основы QA", href: "/roadmap/intro-qa" },
+            { icon: FileText, label: "Статьи", href: "/articles?category=intro" },
         ]
     },
     {
@@ -17,6 +18,7 @@ const navGroups = [
             { icon: GraduationCap, label: "Базовые понятия", href: "/roadmap/basics" },
             { icon: ListChecks, label: "Тест-дизайн & Доки", href: "/roadmap/test-design" },
             { icon: Layers, label: "Виды & Уровни", href: "/roadmap/types" },
+            { icon: FileText, label: "Статьи", href: "/articles?category=basics" },
         ]
     },
     {
@@ -25,6 +27,7 @@ const navGroups = [
             { icon: Database, label: "SQL & Базы данных", href: "/roadmap/databases" },
             { icon: Network, label: "API & REST", href: "/roadmap/api" },
             { icon: Terminal, label: "Автоматизация", href: "/roadmap/automation" },
+            { icon: FileText, label: "Статьи", href: "/articles?category=tech" },
         ]
     },
     {
@@ -33,13 +36,14 @@ const navGroups = [
             { icon: Shield, label: "Security & Perf", href: "/roadmap/security" },
             { icon: GitBranch, label: "Инфраструктура", href: "/roadmap/infrastructure" },
             { icon: Brain, label: "AI в Тестировании", href: "/roadmap/ai" },
+            { icon: FileText, label: "Статьи", href: "/articles?category=advanced" },
         ]
     },
     {
         title: "Карьера",
         items: [
             { icon: Briefcase, label: "Подготовка к работе", href: "/roadmap/career" },
-            { icon: FileText, label: "Статьи", href: "/articles" }
+            { icon: FileText, label: "Статьи", href: "/articles?category=career" }
         ]
     }
 ]

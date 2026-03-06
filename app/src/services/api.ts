@@ -7,8 +7,9 @@ export interface PbArticle {
     slug: string;
     title: string;
     description: string;
-    content: string;           // Markdown-текст статьи
-    cover_image: string;       // Имя файла обложки
+    content: string;
+    cover_image: string;
+    category: string;          // intro | basics | tech | advanced | career
     created: string;
     updated: string;
     collectionId: string;
@@ -16,8 +17,8 @@ export interface PbArticle {
 
 export interface PbArticleImage {
     id: string;
-    article: string;           // ID связанной статьи
-    image: string;             // Имя файла картинки
+    article: string;
+    image: string;
     caption: string;
     sort_order: number;
     collectionId: string;
@@ -28,15 +29,17 @@ export function pbFileUrl(collectionId: string, recordId: string, filename: stri
     return `${PB_URL}/api/files/${collectionId}/${recordId}/${filename}`;
 }
 
-/** Получить список всех статей (отсортированных по дате создания) */
-export async function fetchArticles(): Promise<PbArticle[]> {
+/** Получить список статей. Если передана category — фильтрует по ней */
+export async function fetchArticles(category?: string): Promise<PbArticle[]> {
+    const filter = category ? `&filter=(category='${category}')` : '';
     const res = await fetch(
-        `${PB_URL}/api/collections/articles/records?sort=-created&perPage=100`
+        `${PB_URL}/api/collections/articles/records?sort=-created&perPage=100${filter}`
     );
     if (!res.ok) throw new Error(`PocketBase error: ${res.status}`);
     const data = await res.json();
     return data.items as PbArticle[];
 }
+
 
 /** Получить одну статью по slug */
 export async function fetchArticleBySlug(slug: string): Promise<PbArticle> {

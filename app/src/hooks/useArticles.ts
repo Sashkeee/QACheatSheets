@@ -7,21 +7,23 @@ import {
     PbArticleImage,
 } from '../services/api';
 
-// Hook: список всех статей
-export function useArticles() {
+// Hook: список статей (с опциональным фильтром по категории)
+export function useArticles(category?: string) {
     const [articles, setArticles] = useState<PbArticle[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetchArticles()
+        setLoading(true);
+        fetchArticles(category)
             .then(setArticles)
             .catch((e: Error) => setError(e.message))
             .finally(() => setLoading(false));
-    }, []);
+    }, [category]);
 
     return { articles, loading, error };
 }
+
 
 // Hook: один конкретный материал по slug + его слайды
 export function useArticleDetail(slug: string) {
