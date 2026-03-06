@@ -1,5 +1,8 @@
-// PocketBase REST API service
-const PB_URL = (import.meta as unknown as { env: Record<string, string> }).env.VITE_PB_URL || 'http://localhost:8090';
+// В продакшене используем относительный путь (пустая строка), а запросы перехватит Nginx
+// При локальной разработке стучимся на адрес из .env (по умолчанию localhost:8090)
+const env = (import.meta as unknown as { env: Record<string, any> }).env;
+const PB_URL = env.PROD ? '' : (env.VITE_PB_URL || 'http://localhost:8090');
+
 
 
 export interface PbArticle {
