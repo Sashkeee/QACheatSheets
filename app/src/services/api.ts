@@ -31,10 +31,9 @@ export function pbFileUrl(collectionId: string, recordId: string, filename: stri
 
 /** Получить список статей. Если передана category — фильтрует по ней */
 export async function fetchArticles(category?: string): Promise<PbArticle[]> {
-    const filter = category ? `&filter=(category='${category}')` : '';
-    const res = await fetch(
-        `${PB_URL}/api/collections/articles/records?sort=-created&perPage=100${filter}`
-    );
+    const params = new URLSearchParams({ sort: '-created', perPage: '100' });
+    if (category) params.set('filter', `(category='${category}')`);
+    const res = await fetch(`${PB_URL}/api/collections/articles/records?${params}`);
     if (!res.ok) throw new Error(`PocketBase error: ${res.status}`);
     const data = await res.json();
     return data.items as PbArticle[];
@@ -43,9 +42,8 @@ export async function fetchArticles(category?: string): Promise<PbArticle[]> {
 
 /** Получить одну статью по slug */
 export async function fetchArticleBySlug(slug: string): Promise<PbArticle> {
-    const res = await fetch(
-        `${PB_URL}/api/collections/articles/records?filter=(slug='${slug}')&perPage=1`
-    );
+    const params = new URLSearchParams({ filter: `(slug='${slug}')`, perPage: '1' });
+    const res = await fetch(`${PB_URL}/api/collections/articles/records?${params}`);
     if (!res.ok) throw new Error(`PocketBase error: ${res.status}`);
     const data = await res.json();
     if (!data.items || data.items.length === 0) throw new Error('Article not found');
