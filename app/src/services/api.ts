@@ -52,9 +52,8 @@ export async function fetchArticleBySlug(slug: string): Promise<PbArticle> {
 
 /** Получить все картинки (слайды) для конкретной статьи */
 export async function fetchArticleImages(articleId: string): Promise<PbArticleImage[]> {
-    const res = await fetch(
-        `${PB_URL}/api/collections/article_images/records?filter=(article='${articleId}')&sort=sort_order&perPage=100`
-    );
+    const params = new URLSearchParams({ filter: `(article='${articleId}')`, sort: 'sort_order', perPage: '100' });
+    const res = await fetch(`${PB_URL}/api/collections/article_images/records?${params}`);
     if (!res.ok) throw new Error(`PocketBase error: ${res.status}`);
     const data = await res.json();
     return data.items as PbArticleImage[];

@@ -38,8 +38,13 @@ export function useArticleDetail(slug: string) {
         fetchArticleBySlug(slug)
             .then(async (art) => {
                 setArticle(art);
-                const imgs = await fetchArticleImages(art.id);
-                setImages(imgs);
+                // Ошибка загрузки слайдов не блокирует показ статьи
+                try {
+                    const imgs = await fetchArticleImages(art.id);
+                    setImages(imgs);
+                } catch {
+                    setImages([]);
+                }
             })
             .catch((e: Error) => setError(e.message))
             .finally(() => setLoading(false));
