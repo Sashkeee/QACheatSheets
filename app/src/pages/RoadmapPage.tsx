@@ -68,8 +68,7 @@ function PbArticleCard({ article }: { article: PbArticle }) {
 }
 
 // ── Компонент: режим PocketBase (статьи из БД) ────────────────────
-function PbArticlesView({ roadmapId, pbCategory, title, description }: {
-    roadmapId: string;
+function PbArticlesView({ pbCategory, title, description }: {
     pbCategory: string;
     title: string;
     description: string;
@@ -169,7 +168,6 @@ export function RoadmapPage() {
     if (data.sections.length === 0 && data.pbCategory) {
         return (
             <PbArticlesView
-                roadmapId={data.id}
                 pbCategory={data.pbCategory}
                 title={data.title}
                 description={data.description}
