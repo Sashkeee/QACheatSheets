@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTheme } from '../../stores/theme'
 import { useEffect, useState } from 'react'
-import { Terminal, GraduationCap, ListChecks, Layers, Database, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search, Menu, X } from 'lucide-react'
+import { Terminal, GraduationCap, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search, Menu, X } from 'lucide-react'
 import { AIChatbot } from '../chat/AIChatbot'
 
 const navGroups = [
@@ -16,15 +16,12 @@ const navGroups = [
         title: "Основы & Теория",
         items: [
             { icon: GraduationCap, label: "Базовые понятия", href: "/roadmap/basics" },
-            { icon: ListChecks, label: "Тест-дизайн & Доки", href: "/roadmap/test-design" },
-            { icon: Layers, label: "Виды & Уровни", href: "/roadmap/types" },
             { icon: FileText, label: "Статьи", href: "/articles?category=basics" },
         ]
     },
     {
         title: "Технологии",
         items: [
-            { icon: Database, label: "SQL & Базы данных", href: "/roadmap/databases" },
             { icon: Network, label: "API & REST", href: "/roadmap/api" },
             { icon: Terminal, label: "Автоматизация", href: "/roadmap/automation" },
             { icon: FileText, label: "Статьи", href: "/articles?category=tech" },
