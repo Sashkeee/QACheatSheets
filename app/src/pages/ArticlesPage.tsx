@@ -1,7 +1,8 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { FileText, ChevronRight, Loader2, AlertTriangle } from 'lucide-react';
+import { FileText, ChevronRight, Loader2, AlertTriangle, Eye } from 'lucide-react';
 import { useArticles } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
+import { formatViewCount } from '../hooks/useAnalytics';
 
 const CATEGORIES = [
     { key: '', label: 'Все' },
@@ -111,11 +112,19 @@ export function ArticlesPage() {
                                         </div>
                                     )}
                                     <div className="p-8 flex flex-col items-start space-y-4 flex-1">
-                                        {article.category && (
-                                            <span className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest">
-                                                {CATEGORIES.find(c => c.key === article.category)?.label || article.category}
-                                            </span>
-                                        )}
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            {article.category && (
+                                                <span className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest">
+                                                    {CATEGORIES.find(c => c.key === article.category)?.label || article.category}
+                                                </span>
+                                            )}
+                                            {article.view_count && (
+                                                <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-foreground/5 text-muted-foreground text-[10px] font-semibold">
+                                                    <Eye size={10} />
+                                                    {formatViewCount(article.view_count)}
+                                                </span>
+                                            )}
+                                        </div>
                                         <h2 className="text-2xl font-black tracking-tight leading-tight group-hover:text-primary transition-colors">
                                             {article.title}
                                         </h2>

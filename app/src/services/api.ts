@@ -13,6 +13,7 @@ export interface PbArticle {
     created: string;
     updated: string;
     collectionId: string;
+    view_count?: number;       // количество просмотров
 }
 
 export interface PbArticleImage {

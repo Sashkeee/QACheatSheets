@@ -1,14 +1,18 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Loader2, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Loader2, AlertTriangle, Eye } from 'lucide-react';
 import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
 import { CommentsSection } from '../components/comments/CommentsSection';
+import { usePageView, formatViewCount } from '../hooks/useAnalytics';
 
 export function ArticleDetailPage() {
     const { slug } = useParams<{ slug: string }>();
     const { article, images, loading, error } = useArticleDetail(slug || '');
+
+    // Track page view when article loads
+    usePageView(article?.id || '');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -56,6 +60,12 @@ export function ArticleDetailPage() {
                         <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.25em]">
                             Статьи
                         </span>
+                        {article?.view_count && (
+                            <span className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-foreground/5 text-muted-foreground text-[9px] sm:text-[10px] font-semibold">
+                                <Eye size={12} />
+                                {formatViewCount(article.view_count)}
+                            </span>
+                        )}
                     </div>
                     <h1 className="text-[32px] sm:text-[39px] font-bold tracking-tight text-foreground leading-[1.2] max-w-3xl text-left">
                         {article.title}
