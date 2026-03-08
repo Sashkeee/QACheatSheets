@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Loader2, AlertTriangle } from 'lucide-react';
 import { useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
 
@@ -78,10 +79,9 @@ export function ArticleDetailPage() {
             )}
 
             {/* Main article content */}
-            <div
-                className="article-content"
-                dangerouslySetInnerHTML={{ __html: article.content }}
-            />
+            <div className="article-content">
+                <ReactMarkdown>{article.content}</ReactMarkdown>
+            </div>
 
             {/* Slides */}
             {images.length > 0 && (
