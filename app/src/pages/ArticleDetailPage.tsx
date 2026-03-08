@@ -6,6 +6,7 @@ import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
 import { CommentsSection } from '../components/comments/CommentsSection';
 import { usePageView, formatViewCount } from '../hooks/useAnalytics';
+import { SEO } from '../components/seo/SEO';
 
 export function ArticleDetailPage() {
     const { slug } = useParams<{ slug: string }>();
@@ -22,10 +23,16 @@ export function ArticleDetailPage() {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center py-40 gap-4 text-muted-foreground">
-                <Loader2 size={36} className="animate-spin text-primary" />
-                <p className="font-medium">Загружаем статью...</p>
-            </div>
+            <>
+                <SEO
+                    title="Загрузка статьи..."
+                    description="Пожалуйста, подождите, статья загружается"
+                />
+                <div className="flex flex-col items-center justify-center py-40 gap-4 text-muted-foreground">
+                    <Loader2 size={36} className="animate-spin text-primary" />
+                    <p className="font-medium">Загружаем статью...</p>
+                </div>
+            </>
         );
     }
 
@@ -46,8 +53,21 @@ export function ArticleDetailPage() {
         );
     }
 
+    const coverImageUrl = article?.cover_image
+        ? pbFileUrl(article.collectionId, article.id, article.cover_image)
+        : undefined;
+
     return (
-        <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
+        <>
+            <SEO
+                title={article?.title || 'Статья'}
+                description={article?.description || ''}
+                image={coverImageUrl}
+                url={`https://qacheatsheet.ru/articles/${slug}`}
+                type="article"
+                keywords={`QA, тестирование, ${article?.category}`}
+            />
+            <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
             {/* Back + Title */}
             <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8 px-2 sm:px-6">
                 <Link to="/articles">
@@ -128,6 +148,7 @@ export function ArticleDetailPage() {
                     Все статьи
                 </Link>
             </footer>
-        </div>
+            </div>
+        </>
     );
 }

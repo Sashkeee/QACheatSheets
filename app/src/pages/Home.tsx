@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Brain, GraduationCap, Network, Terminal, Shield, Sparkles, Briefcase, LucideIcon, ChevronRight } from 'lucide-react'
 import { useMiniArticles } from '../hooks/useMiniArticles'
+import { SEO } from '../components/seo/SEO'
 
 interface KnowledgeSection {
     href: string;
@@ -25,7 +26,15 @@ export function Home() {
     const { articles } = useMiniArticles()
 
     return (
-        <div className="mx-auto max-w-6xl w-full space-y-20 animate-in fade-in duration-1000 pb-20">
+        <>
+            <SEO
+                title="QA CheatSheet | Шпаргалка для тестировщика"
+                description="Полная база знаний по QA и тестированию: SQL, API, автоматизация, безопасность, карьера. Статьи, гайды и практические советы для QA инженеров из России и СНГ."
+                image="https://qacheatsheet.ru/og-image.png"
+                url="https://qacheatsheet.ru"
+                keywords="QA, тестирование, SQL, API, автоматизация, безопасность, инженер по тестированию"
+            />
+            <div className="mx-auto max-w-6xl w-full space-y-20 animate-in fade-in duration-1000 pb-20">
 
             {/* ── Hero Logo ── */}
             <div className="flex flex-col items-center justify-center pt-6 pb-2">
@@ -97,7 +106,8 @@ export function Home() {
                 </div>
             </section>
 
-        </div>
+            </div>
+        </>
     )
 }
 
