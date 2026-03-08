@@ -20,12 +20,13 @@ export function useMiniArticles() {
             try {
                 setLoading(true);
                 const response = await fetch(
-                    'http://5.35.126.199:8090/api/collections/mini_articles/records?sort=order'
+                    'http://5.35.126.199:8090/api/collections/mini_articles/records?sort=-created&limit=50'
                 );
 
                 if (!response.ok) {
                     // Если collection не существует, возвращаем пустой массив
                     if (response.status === 404) {
+                        console.warn('Mini articles collection not found (404)');
                         setArticles([]);
                         setError(null);
                         setLoading(false);
@@ -35,12 +36,20 @@ export function useMiniArticles() {
                 }
 
                 const data = await response.json();
-                setArticles(data.items || []);
+                console.log('Mini articles fetched:', data);
+
+                if (data.items && Array.isArray(data.items)) {
+                    console.log(`Loaded ${data.items.length} mini articles`);
+                    setArticles(data.items);
+                } else {
+                    console.warn('Invalid response format, expected items array');
+                    setArticles([]);
+                }
                 setError(null);
             } catch (err) {
                 console.error('Failed to fetch mini articles:', err);
                 setArticles([]);
-                setError(null); // Не показываем ошибку, просто используем значение по умолчанию
+                setError(null);
             } finally {
                 setLoading(false);
             }
