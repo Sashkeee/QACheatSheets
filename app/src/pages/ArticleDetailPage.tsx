@@ -1,7 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Loader2, AlertTriangle } from 'lucide-react';
 import { useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
 import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
 
@@ -41,15 +40,6 @@ export function ArticleDetailPage() {
         );
     }
 
-    // Строим финальный Markdown: вставляем слайды в конец статьи
-    const slidesMarkdown = images.length > 0
-        ? '\n\n---\n\n## 📑 Слайды\n\n' + images.map((img, i) =>
-            `![Слайд ${i + 1}](${pbFileUrl(img.collectionId, img.id, img.image)})${img.caption ? `\n*${img.caption}*` : ''}`
-        ).join('\n\n')
-        : '';
-
-    const fullContent = article.content + slidesMarkdown;
-
     return (
         <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700 pb-20">
             {/* Back + Title */}
@@ -88,9 +78,32 @@ export function ArticleDetailPage() {
             )}
 
             {/* Main article content */}
-            <div className="article-content">
-                <ReactMarkdown>{fullContent}</ReactMarkdown>
-            </div>
+            <div
+                className="article-content"
+                dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+
+            {/* Slides */}
+            {images.length > 0 && (
+                <div className="space-y-6">
+                    <hr className="border-white/10" />
+                    <h2 className="text-2xl font-bold">📑 Слайды</h2>
+                    {images.map((img, i) => (
+                        <figure key={img.id} className="space-y-2">
+                            <img
+                                src={pbFileUrl(img.collectionId, img.id, img.image)}
+                                alt={img.caption || `Слайд ${i + 1}`}
+                                className="w-full h-auto rounded-xl"
+                            />
+                            {img.caption && (
+                                <figcaption className="text-sm text-muted-foreground text-center italic">
+                                    {img.caption}
+                                </figcaption>
+                            )}
+                        </figure>
+                    ))}
+                </div>
+            )}
 
             {/* Footer */}
             <footer className="pt-20 mt-20 border-t border-white/10 flex flex-col items-center gap-10 text-center px-4">
