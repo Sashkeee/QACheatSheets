@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
+import { CommentsSection } from '../components/comments/CommentsSection';
 
 export function ArticleDetailPage() {
     const { slug } = useParams<{ slug: string }>();
@@ -104,6 +105,9 @@ export function ArticleDetailPage() {
                     ))}
                 </div>
             )}
+
+            {/* Comments Section */}
+            <CommentsSection articleId={article.id} />
 
             {/* Footer */}
             <footer className="pt-20 mt-20 border-t border-white/10 flex flex-col items-center gap-10 text-center px-4">
