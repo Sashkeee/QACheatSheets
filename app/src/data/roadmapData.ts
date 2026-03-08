@@ -77,66 +77,6 @@ export const roadmapData: Record<string, RoadmapItem> = {
             }
         ]
     },
-    "test-design": {
-        id: "test-design",
-        title: "Мастер Тест-дизайна",
-        description: "Искусство создания идеальных проверок с минимальными усилиями.",
-        source: "Ольга Назина, Ли Копланд, Крис Уиттакер",
-        sections: [
-            {
-                title: "Техники 'Черного ящика' (Практика)",
-                image: "/test_design_techniques_diagram.png",
-                content: [
-                    "1. Классы Эквивалентности (Equivalence Partitioning):",
-                    "   • Пример 'Золушка' (О. Назина): Принц ищет девушку с 35 размером ноги. Классы: [0-34] (не подходит), [35] (подходит!), [36-50] (не подходит). Нам не нужно примерять туфельку всем 1000 гостьям, достаточно одной из каждого класса.",
-                    "",
-                    "2. Анализ Граничных Значений (BVA):",
-                    "   • Ошибки живут на краях. Для диапазона [6-20] символов пароля тестируем: 5, 6, 7 (нижний край) и 19, 20, 21 (верхний край).",
-                    "",
-                    "3. Таблица решений (Decision Table):",
-                    "   • Матрица для сложных условий: 'Если VIP AND сумма > 5000 AND город = Москва -> Логика скидки'.",
-                    "",
-                    "4. Переход состояний (State Transition):",
-                    "   • Валидация логики статусов: Нельзя перевести заказ из 'Новый' сразу в 'Доставлен', минуя 'Оплачен'."
-                ],
-                tips: [
-                    "Начинайте с позитивного теста (Happy Path). Если он не прошел — остальное не имеет смысла.",
-                    "Используйте Pairwise, чтобы не тестировать миллион комбинаций браузеров и ОС."
-                ]
-            }
-        ]
-    },
-    databases: {
-        id: "databases",
-        title: "SQL для QA: База Sakila",
-        description: "Работа с данными на примерах из книги Алана Болье.",
-        source: "Alan Beaulieu 'Learning SQL'",
-        sections: [
-            {
-                title: "Выборка и фильтрация (SELECT)",
-                content: [
-                    "Примеры на базе Sakila (прокат фильмов):",
-                    "• SELECT title FROM film WHERE rating = 'G' AND length > 120;",
-                    "• SELECT first_name, last_name FROM actor WHERE last_name LIKE 'WILL%';",
-                    "• SELECT * FROM customer WHERE active = 0 ORDER BY create_date DESC;",
-                    "Фильтры IN, BETWEEN и LIKE — ваши лучшие друзья при проверке данных в БД."
-                ]
-            },
-            {
-                title: "Объединение таблиц (The Joins)",
-                image: "/sql_joins_diagram.png",
-                content: [
-                    "Как узнать, в каких фильмах снимался актер Nick Wahlberg?",
-                    "SELECT f.title FROM film f",
-                    "JOIN film_actor fa ON f.film_id = fa.film_id",
-                    "JOIN actor a ON fa.actor_id = a.actor_id",
-                    "WHERE a.first_name = 'NICK' AND a.last_name = 'WAHLBERG';",
-                    "• INNER JOIN: Только пересечения.",
-                    "• LEFT JOIN: Все из левой таблицы + совпадения (полезно для поиска 'потерянных' данных)."
-                ]
-            }
-        ]
-    },
     api: {
         id: "api",
         title: "Тестирование API & Микросервисов",
@@ -169,24 +109,6 @@ export const roadmapData: Record<string, RoadmapItem> = {
                     "• 3xx: Редирект (Ушли на другой адрес).",
                     "• 4xx: Ошибка клиента (400 Bad Request, 404 Not Found).",
                     "• 5xx: Ошибка сервера (500 Internal Error, 502 Bad Gateway)."
-                ]
-            }
-        ]
-    },
-    types: {
-        id: "types",
-        title: "Виды и Уровни",
-        description: "Полная карта мира тестирования: от Unit до UAT.",
-        source: "ISTQB Foundation Level 4.0, Google 'How we test software'",
-        sections: [
-            {
-                title: "Пирамида vs Мороженое",
-                image: "/test_pyramid_diagram.png",
-                content: [
-                    "• Unit (Модульные): Основание. Тестируем функции в коде isolated.",
-                    "• Интеграционные: Проверяем связь между модулями или БД.",
-                    "• Системные (E2E): Проверяем весь путь пользователя от корзины до оплаты.",
-                    "• Анти-паттерн 'Рожок мороженого': Когда ручных тестов больше, чем автотестов. Это дорого и медленно."
                 ]
             }
         ]

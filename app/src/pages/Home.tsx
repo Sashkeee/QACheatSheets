@@ -1,4 +1,4 @@
-import { ArrowRight, Triangle, Bug, Globe, Database, Zap, Shield, Sparkles, LucideIcon } from 'lucide-react'
+import { ArrowRight, Globe, Zap, Shield, Sparkles, LucideIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 interface QuickCardProps {
@@ -68,24 +68,6 @@ export function Home() {
 
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     <QuickCard
-                        href="/roadmap/types"
-                        icon={Triangle}
-                        color="text-blue-500"
-                        bgColor="bg-blue-500/10"
-                        title="Пирамида тестов"
-                        desc="Глубокий разбор Unit, Integration и E2E по стандартам Google."
-                        tag="Теория"
-                    />
-                    <QuickCard
-                        href="/roadmap/test-design"
-                        icon={Bug}
-                        color="text-red-500"
-                        bgColor="bg-red-500/10"
-                        title="Тест-дизайн"
-                        desc="Мастерство EP, BVA и Pairwise на живых примерах."
-                        tag="Практика"
-                    />
-                    <QuickCard
                         href="/roadmap/api"
                         icon={Globe}
                         color="text-emerald-500"
@@ -93,15 +75,6 @@ export function Home() {
                         title="REST API"
                         desc="Все о методах, статус-кодах и HTTP протоколе."
                         tag="Гайд"
-                    />
-                    <QuickCard
-                        href="/roadmap/databases"
-                        icon={Database}
-                        color="text-amber-500"
-                        bgColor="bg-amber-500/10"
-                        title="SQL Основы"
-                        desc="SELECT, JOIN и агрегаты — то, что реально нужно QA."
-                        tag="Шпаргалка"
                     />
                     <QuickCard
                         href="/roadmap/infrastructure"
