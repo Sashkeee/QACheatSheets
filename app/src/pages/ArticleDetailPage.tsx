@@ -7,6 +7,7 @@ import { pbFileUrl } from '../services/api';
 import { CommentsSection } from '../components/comments/CommentsSection';
 import { usePageView, formatViewCount } from '../hooks/useAnalytics';
 import { SEO } from '../components/seo/SEO';
+import { ShareButtons } from '../components/share/ShareButtons';
 
 export function ArticleDetailPage() {
     const { slug } = useParams<{ slug: string }>();
@@ -135,6 +136,13 @@ export function ArticleDetailPage() {
                     ))}
                 </div>
             )}
+
+            {/* Share Buttons */}
+            <ShareButtons
+                title={article?.title || ''}
+                description={article?.description || ''}
+                url={`https://qacheatsheet.ru/articles/${slug}`}
+            />
 
             {/* Comments Section */}
             <CommentsSection articleId={article.id} />
