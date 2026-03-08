@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Brain, GraduationCap, Network, Terminal, Shield, GitBranch, Sparkles, Briefcase, LucideIcon, ChevronRight } from 'lucide-react'
+import { ArrowRight, Brain, GraduationCap, Network, Terminal, Shield, Sparkles, Briefcase, LucideIcon, ChevronRight } from 'lucide-react'
 import { useMiniArticles } from '../hooks/useMiniArticles'
 
 interface KnowledgeSection {
@@ -17,8 +17,7 @@ const KNOWLEDGE_SECTIONS: KnowledgeSection[] = [
     { href: '/roadmap/api',            icon: Network,       color: 'text-emerald-400', bgColor: 'bg-emerald-400/10', title: 'API & REST',       tag: 'Гайд' },
     { href: '/roadmap/automation',     icon: Terminal,      color: 'text-amber-400',   bgColor: 'bg-amber-400/10',   title: 'Автоматизация',    tag: 'Код' },
     { href: '/roadmap/security',       icon: Shield,        color: 'text-rose-400',    bgColor: 'bg-rose-400/10',    title: 'Security',         tag: 'Важно' },
-    { href: '/roadmap/infrastructure', icon: GitBranch,     color: 'text-purple-400',  bgColor: 'bg-purple-400/10',  title: 'Инфраструктура',   tag: 'DevOps' },
-    { href: '/roadmap/ai',             icon: Sparkles,      color: 'text-pink-400',    bgColor: 'bg-pink-400/10',    title: 'AI в QA',          tag: 'Будущее' },
+    { href: '/roadmap/databases',      icon: Sparkles,      color: 'text-pink-400',    bgColor: 'bg-pink-400/10',    title: 'Базы данных',      tag: 'SQL' },
     { href: '/roadmap/career',         icon: Briefcase,     color: 'text-teal-400',    bgColor: 'bg-teal-400/10',    title: 'Карьера',          tag: 'Работа' },
 ]
 

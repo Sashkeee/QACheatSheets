@@ -8,7 +8,8 @@ const CATEGORIES = [
     { key: 'intro', label: 'Введение' },
     { key: 'basics', label: 'Основы и теория' },
     { key: 'tech', label: 'Технологии' },
-    { key: 'advanced', label: 'Продвинутое' },
+    { key: 'databases', label: 'Базы данных' },
+    { key: 'security', label: 'Security' },
     { key: 'career', label: 'Карьера' },
 ];
 

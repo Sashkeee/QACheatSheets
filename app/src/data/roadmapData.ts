@@ -69,11 +69,11 @@ export const roadmapData: Record<string, RoadmapItem> = {
     },
     security: {
         id: "security",
-        title: "Продвинутое тестирование",
-        description: "Продвинутые техники: безопасность, GraphQL, pairwise и оптимизация запросов.",
+        title: "Security тестирование",
+        description: "Безопасность веб-приложений: OWASP Top 10, уязвимости и методы проверки.",
         source: "OWASP Top 10, Modern Testing Practices",
         sections: [],
-        pbCategory: "advanced"
+        pbCategory: "security"
     },
     infrastructure: {
         id: "infrastructure",
@@ -81,15 +81,15 @@ export const roadmapData: Record<string, RoadmapItem> = {
         description: "Git, Docker и CI/CD — база современного инженера по тестированию.",
         source: "DevOps for Beginners, Atlassian Guides",
         sections: [],
-        pbCategory: "advanced"
+        pbCategory: "infrastructure"
     },
-    ai: {
-        id: "ai",
-        title: "AI в QA: Будущее наступило",
-        description: "Бустим продуктивность с помощью нейросетей. Инструменты и практики 2026 года.",
-        source: "Modern Testing Blog 2026",
+    databases: {
+        id: "databases",
+        title: "Базы данных & SQL",
+        description: "SQL от основ до продвинутых запросов: JOIN, индексы, оптимизация.",
+        source: "SQL Academy, PostgreSQL Docs",
         sections: [],
-        pbCategory: "advanced"
+        pbCategory: "databases"
     },
     career: {
         id: "career",
