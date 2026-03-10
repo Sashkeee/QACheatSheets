@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Brain, GraduationCap, Network, Terminal, Shield, Sparkles, Briefcase, LucideIcon, ChevronRight } from 'lucide-react'
+import { ArrowRight, Brain, GraduationCap, Network, Terminal, Shield, Sparkles, Briefcase, LucideIcon, ChevronRight, BookOpen } from 'lucide-react'
 import { useMiniArticles } from '../hooks/useMiniArticles'
 import { SEO } from '../components/seo/SEO'
 
@@ -142,25 +142,23 @@ interface MiniArticleCardProps {
     slug?: string;
 }
 
-function MiniArticleCard({ title, description, reading_time, slug }: MiniArticleCardProps) {
+function MiniArticleCard({ title, reading_time, slug }: MiniArticleCardProps) {
     const href = slug ? `/articles/${slug}` : '/articles'
 
     return (
-        <Link to={href} className="group block">
-            <div className="glass h-full rounded-[2rem] p-3 transition-all duration-300 hover:scale-[1.02] border border-white/5 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5">
-                <div className="h-full rounded-[1.7rem] bg-background/40 p-6 flex flex-col gap-3 shadow-inner shadow-white/5">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-widest">
-                        {reading_time} чтение
-                    </span>
-                    <h3 className="text-base font-black tracking-tight leading-tight group-hover:text-primary transition-colors line-clamp-2">
-                        {title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground font-medium leading-relaxed line-clamp-3 flex-1">
-                        {description}
-                    </p>
-                    <div className="flex items-center gap-1.5 text-primary text-[10px] font-black uppercase tracking-[0.2em] pt-1">
-                        Читать <ChevronRight size={12} />
-                    </div>
+        <Link to={href} className="volumetric group flex flex-col justify-between rounded-2xl p-5 transition-all cursor-pointer overflow-hidden hover:scale-[1.03]">
+            <div className="space-y-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl text-primary bg-primary/10 shadow-inner">
+                    <BookOpen size={22} className="stroke-[2]" />
+                </div>
+                <h3 className="text-base font-black text-foreground tracking-tight leading-tight group-hover:text-primary transition-colors line-clamp-3">
+                    {title}
+                </h3>
+            </div>
+            <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-3">
+                <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">{reading_time}</span>
+                <div className="h-7 w-7 rounded-lg bg-background/50 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 transition-all">
+                    <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                 </div>
             </div>
         </Link>
@@ -170,13 +168,15 @@ function MiniArticleCard({ title, description, reading_time, slug }: MiniArticle
 /* ── Empty placeholder card ── */
 function EmptyMiniCard() {
     return (
-        <div className="glass rounded-[2rem] p-3 border border-white/5 opacity-40">
-            <div className="rounded-[1.7rem] bg-background/40 p-6 flex flex-col gap-3 h-44">
-                <div className="h-2 w-16 rounded-full bg-primary/20" />
+        <div className="volumetric flex flex-col justify-between rounded-2xl p-5 opacity-40 pointer-events-none">
+            <div className="space-y-3">
+                <div className="h-11 w-11 rounded-xl bg-primary/10" />
                 <div className="h-3 w-full rounded-full bg-foreground/10" />
                 <div className="h-3 w-3/4 rounded-full bg-foreground/10" />
-                <div className="h-2 w-full rounded-full bg-foreground/5 mt-1" />
-                <div className="h-2 w-2/3 rounded-full bg-foreground/5" />
+            </div>
+            <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-3">
+                <div className="h-2 w-16 rounded-full bg-foreground/10" />
+                <div className="h-7 w-7 rounded-lg bg-background/50" />
             </div>
         </div>
     )
