@@ -119,7 +119,7 @@ export function ArticlesPage() {
                                                     {CATEGORIES.find(c => c.key === article.category)?.label || article.category}
                                                 </span>
                                             )}
-                                            {article.view_count && (
+                                            {!!article.view_count && (
                                                 <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-foreground/5 text-muted-foreground text-[10px] font-semibold">
                                                     <Eye size={10} />
                                                     {formatViewCount(article.view_count)}
