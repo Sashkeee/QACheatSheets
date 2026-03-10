@@ -67,7 +67,8 @@ function collectMdFiles(dir) {
 
 /** Парсит frontmatter и тело файла */
 function parseFrontmatter(text) {
-    const match = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    const normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    const match = normalized.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (!match) return null;
 
     const frontmatter = {};
