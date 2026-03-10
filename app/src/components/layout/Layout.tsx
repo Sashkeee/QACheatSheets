@@ -2,7 +2,6 @@ import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom'
 import { useTheme } from '../../stores/theme'
 import { useEffect, useState } from 'react'
 import { Terminal, GraduationCap, Network, Shield, GitBranch, Brain, Briefcase, FileText, Sun, Moon, User, Search, Menu, X } from 'lucide-react'
-import { AIChatbot } from '../chat/AIChatbot'
 
 const navGroups = [
     {
@@ -151,8 +150,7 @@ export function Layout() {
                 </main>
             </div>
 
-            {/* Глобальный AI Помощник */}
-            <AIChatbot />
+
         </div>
     )
 }

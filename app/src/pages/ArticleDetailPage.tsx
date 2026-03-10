@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Loader2, AlertTriangle, Eye } from 'lucide-react';
-import { useEffect } from 'react';
+import { ArrowLeft, Loader2, AlertTriangle, Eye, BookOpen, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useArticleDetail } from '../hooks/useArticles';
 import { pbFileUrl } from '../services/api';
@@ -8,10 +8,18 @@ import { CommentsSection } from '../components/comments/CommentsSection';
 import { usePageView, formatViewCount } from '../hooks/useAnalytics';
 import { SEO } from '../components/seo/SEO';
 import { ShareButtons } from '../components/share/ShareButtons';
+import { QuizBlock } from '../components/QuizBlock';
 
 export function ArticleDetailPage() {
     const { slug } = useParams<{ slug: string }>();
     const { article, images, loading, error } = useArticleDetail(slug || '');
+    const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
+
+    const handleAnswer = (sIdx: number, qIdx: number, oIdx: number) => {
+        const key = `${sIdx}-${qIdx}`;
+        if (quizAnswers[key] !== undefined) return;
+        setQuizAnswers(prev => ({ ...prev, [key]: oIdx }));
+    };
 
     // Track page view when article loads
     usePageView(article?.id || '');
@@ -113,6 +121,52 @@ export function ArticleDetailPage() {
             {/* Main article content */}
             <div className="article-content">
                 <ReactMarkdown>{article.content}</ReactMarkdown>
+
+                {/* Glossary */}
+                {article.glossary && article.glossary.length > 0 && (
+                    <div className="p-6 sm:p-8 lg:p-10 rounded-[1.5rem] sm:rounded-[2rem] bg-primary/5 border border-primary/10 relative overflow-hidden group/glossary mt-12">
+                        <div className="absolute top-0 right-0 h-40 w-40 sm:h-60 sm:w-60 bg-primary/10 rounded-full blur-[60px] sm:blur-[80px] -mr-20 -mt-20 sm:-mr-32 sm:-mt-32 group-hover/glossary:scale-110 transition-transform duration-1000" />
+                        <div className="flex items-center gap-3 text-primary font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-6 sm:mb-8 relative z-10">
+                            <BookOpen size={18} /> Словарь терминов
+                        </div>
+                        <div className="grid gap-5 sm:gap-6 relative z-10">
+                            {article.glossary.map((entry, i) => (
+                                <div key={i} className="space-y-1">
+                                    <span className="text-base sm:text-lg font-black text-foreground block">{entry.term}</span>
+                                    <p className="text-sm sm:text-base text-foreground/70 font-medium leading-relaxed">{entry.definition}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Mistakes */}
+                {article.mistakes && article.mistakes.length > 0 && (
+                    <div className="p-6 sm:p-8 lg:p-10 rounded-[1.5rem] sm:rounded-[2rem] bg-red-500/5 border border-red-500/20 relative overflow-hidden group/mistake mt-12">
+                        <div className="absolute top-0 right-0 h-40 w-40 sm:h-60 sm:w-60 bg-red-500/10 rounded-full blur-[60px] sm:blur-[80px] -mr-20 -mt-20 sm:-mr-32 sm:-mt-32 group-hover/mistake:scale-110 transition-transform duration-1000" />
+                        <div className="flex items-center gap-3 text-red-500 font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-6 sm:mb-8 relative z-10">
+                            <XCircle size={18} /> Типичные ошибки новичков
+                        </div>
+                        <div className="grid gap-4 sm:gap-6 relative z-10 text-foreground">
+                            {article.mistakes.map((mistake, i) => (
+                                <div key={i} className="p-4 sm:p-5 rounded-2xl bg-red-500/10 border border-red-500/10 font-bold leading-relaxed flex flex-col sm:flex-row gap-3 sm:gap-4 italic shadow-sm text-sm sm:text-base">
+                                    <div className="h-6 w-6 shrink-0 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 text-[10px] font-black">!</div>
+                                    {mistake}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Quiz */}
+                {article.quiz && article.quiz.length > 0 && (
+                    <QuizBlock
+                        quiz={article.quiz}
+                        currentSectionIdx={0}
+                        answers={quizAnswers}
+                        onAnswer={handleAnswer}
+                    />
+                )}
             </div>
 
             {/* Slides */}

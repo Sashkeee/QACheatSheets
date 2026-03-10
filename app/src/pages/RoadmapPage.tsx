@@ -68,10 +68,11 @@ function PbArticleCard({ article }: { article: PbArticle }) {
 }
 
 // ── Компонент: режим PocketBase (статьи из БД) ────────────────────
-function PbArticlesView({ pbCategory, title, description }: {
+function PbArticlesView({ pbCategory, title, description, sort = '-created' }: {
     pbCategory: string;
     title: string;
     description: string;
+    sort?: string;
 }) {
     const [articles, setArticles] = useState<PbArticle[]>([]);
     const [loading, setLoading] = useState(true);
@@ -79,7 +80,7 @@ function PbArticlesView({ pbCategory, title, description }: {
 
     useEffect(() => {
         setLoading(true);
-        fetchArticles(pbCategory)
+        fetchArticles(pbCategory, sort)
             .then(data => { setArticles(data); setError(null); })
             .catch(e => setError(e.message))
             .finally(() => setLoading(false));
@@ -171,6 +172,7 @@ export function RoadmapPage() {
                 pbCategory={data.pbCategory}
                 title={data.title}
                 description={data.description}
+                sort={data.pbSort}
             />
         );
     }

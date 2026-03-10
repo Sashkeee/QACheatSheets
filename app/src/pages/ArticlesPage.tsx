@@ -11,6 +11,7 @@ const CATEGORIES = [
     { key: 'tech', label: 'Технологии' },
     { key: 'databases', label: 'Базы данных' },
     { key: 'security', label: 'Security' },
+    { key: 'infrastructure', label: 'Инфраструктура' },
     { key: 'career', label: 'Карьера' },
 ];
 

@@ -20,14 +20,9 @@ export interface RoadmapItem {
     description: string;
     sections: RoadmapSection[];
     source: string;
-    pbCategory?: string; // если задан — статьи грузятся из PocketBase
+    pbCategory?: string;  // если задан — статьи грузятся из PocketBase
+    pbSort?: string;      // PocketBase sort string (по умолчанию '-created')
 }
-
-import { introQa1 } from './intro-qa/introQa1';
-import { introQa2 } from './intro-qa/introQa2';
-import { introQa3 } from './intro-qa/introQa3';
-import { introQa4 } from './intro-qa/introQa4';
-import { introQa5 } from './intro-qa/introQa5';
 
 export const roadmapData: Record<string, RoadmapItem> = {
     "intro-qa": {
@@ -35,13 +30,9 @@ export const roadmapData: Record<string, RoadmapItem> = {
         title: "Начало. Основы QA и процессы",
         description: "Фундаментальное введение в мир качества: разница между QA/QC/Testing и базовые принципы индустрии.",
         source: "ISTQB, Роман Савин 'Тестирование dot com', Ольга Назина 'Курс молодого бойца'",
-        sections: [
-            introQa1,
-            introQa2,
-            introQa3,
-            introQa4,
-            introQa5
-        ]
+        sections: [],
+        pbCategory: "intro",
+        pbSort: "sort_order",
     },
     basics: {
         id: "basics",
